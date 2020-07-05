@@ -9,6 +9,7 @@ import './App.css';
 
 function App() {
   const [products, setProduct] = useState([...data]);
+  const [cartItems, setCartItems] = useState([]);
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
@@ -16,10 +17,18 @@ function App() {
     setProduct(results);
   }, [keyword]);
 
+  const addCartItem = (id) => {
+    const item = products.find(product => product.id === id);
+    setCartItems((items) =>[
+      ...items,
+      item
+    ]);
+  };
+
   return <div className="App">
     <NavBar setKeyword={setKeyword} />
-    <ProductList products={products}/>
-    <Cart />
+    <ProductList products={products} addCartItem={addCartItem} />
+    <Cart cartItems={cartItems} />
   </div>
 }
 
