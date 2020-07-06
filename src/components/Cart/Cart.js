@@ -25,7 +25,7 @@ const Cart = ({ cartItems, removeCartItem, clearCart }) => {
         setAddress(e.target.value);
     }
 
-    const total = cartItems.reduce((sum, curr) => (sum + curr.price), 0);
+    const total = cartItems.reduce((sum, curr) => (sum + curr.price * curr.quantity), 0);
     return (
         <div className="cart">
             <h4>Cart Items</h4>
@@ -35,7 +35,7 @@ const Cart = ({ cartItems, removeCartItem, clearCart }) => {
                         <span>Cart is empty</span>
                     </div>
                 </div>)}
-                {cartItems.length !== 0 && cartItems.map(item => <CartItem {...item} removeCartItem={removeCartItem} />)}
+                {cartItems.length !== 0 && cartItems.map(item => <CartItem {...item} price={item.price * item.quantity} removeCartItem={removeCartItem} />)}
                 {cartItems.length !== 0 && (
                     <>
                         <div className="cart-item">
