@@ -1,12 +1,12 @@
 import React from "react";
 import './Cart.css'
 
-const CartItem = ({ title, price }) => {
+const CartItem = ({ title, price, quantity }) => {
     return (
         <div className="cart-item">
-            <button>x</button>
+            <button>X</button>
             <div className="info">
-                <span>{title}</span>
+            <span>{title} x {quantity}</span>
                 <span>${price}</span>
             </div>
         </div>
@@ -14,7 +14,7 @@ const CartItem = ({ title, price }) => {
 };
 
 const Cart = ({ cartItems }) => {
-    const total = cartItems.reduce((sum, curr) => sum + curr.price, 0);
+    const total = cartItems.reduce((sum, curr) => (sum + curr.price), 0);
     return (
         <div className="cart">
             <h4>Cart Items</h4>
