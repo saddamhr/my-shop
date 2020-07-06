@@ -98,3 +98,7 @@
   flex: auto;
   justify-content: space-between;
 }
+
+.cart-item .info button {
+  width: 100px;
+}
