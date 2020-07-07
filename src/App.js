@@ -7,48 +7,19 @@ import data from './data'
 
 import './App.css';
 
+import useCart from './hooks/useCart'
+
 function App() {
   const [products, setProduct] = useState([...data]);
-  const [cartItems, setCartItems] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const {cartItems, addCartItem, removeCartItem, clearCart} = useCart([], products);
 
   useEffect(() => {
     const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
     setProduct(results);
   }, [keyword]);
 
-  const addCartItem = (id) => {
-    const item = products.find(product => product.id === id);
-    setCartItems((items) =>
-    {
-      const itemIndex = items.findIndex(currentItem => currentItem.id === id);
-      if(itemIndex === -1) {
-        return [
-          ...items, 
-          {
-            ...item,
-            quantity: 1
-        }
-      ];
-      } else {
-        return items.map(currentItem => currentItem.id === id ? ({
-            ...item,
-            quantity: parseInt(currentItem.quantity) + 1
-          }) : currentItem);
-      }
-    });
-  };
-
-  const removeCartItem = id => {
-    setCartItems((items) => items.filter(item => item.id !== id));
-  };
-
-  const clearCart = () => {
-    const res = window.confirm("Are you sure to perform the action?");
-    if(res) {
-      setCartItems([]); 
-    }
-  };
+  
 
   return <div className="App">
     <NavBar setKeyword={setKeyword} />
