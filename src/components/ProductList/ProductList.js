@@ -1,5 +1,7 @@
-import React from 'react';
-import './ProductList.css'
+import React, { useContext } from 'react';
+import './ProductList.css';
+import ThemeContext from '../../ThemeContext';
+
 
 const Product = ({ id, title, brand, price, image_url, addCartItem }) => {
     return (
@@ -18,9 +20,13 @@ const Product = ({ id, title, brand, price, image_url, addCartItem }) => {
 }
 
 const ProductList = ({ products, addCartItem }) => {
-    return <div className="product-list">
-        {products.map(product => <Product {...product} key={product.id} addCartItem = {addCartItem} />)}
-    </div>
+    const { dark } = useContext(ThemeContext);
+
+    return (
+        <div className={`product-list ${dark ? 'dark' : 'light'}`}>
+            {products.map(product => <Product {...product} key={product.id} addCartItem={addCartItem} />)}
+        </div>
+    )
 }
 
 export default ProductList;

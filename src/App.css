@@ -5,6 +5,10 @@
   justify-content: space-evenly;
 }
 
+.App.dark {
+  background-color: black;
+}
+
 .nav-bar {
   display: flex;
   justify-content: center;
@@ -32,6 +36,11 @@
   flex-flow: row wrap;
   flex: 0 0 60%;
   justify-content: center;
+}
+
+.product-list.dark {
+  background-color: black;
+  color: white;
 }
 
 .product {
@@ -73,6 +82,11 @@
   height: 100vh;
   position: sticky;
   top: 50px;
+}
+
+.cart.dark {
+  background-color: black;
+  color: white;
 }
 
 .cart .cart-items {
