@@ -9,9 +9,9 @@ const ProductList = ({ products, addCartItem }) => {
 
     return (
         <div className={`product-list ${dark ? 'dark' : 'light'}`}>
-            {products.map(product => <ListProduct {...product} key={product.id} addCartItem={addCartItem} />)}
+            {products.map(product => (<ListProduct {...product} key={product.id} addCartItem={addCartItem} />))}
         </div>
-    )
-}
+    );
+};
 
 export default ProductList;

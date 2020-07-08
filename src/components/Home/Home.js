@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import ProductList from '../../components/ProductList/ListProduct';
+import ProductList from '../../components/ProductList/ProductList';
 import Cart from '../../components/Cart/Cart';
 import useCart from '../../hooks/useCart';
 import data from '../../data'
 
+
 const Home = ({ keyword }) => {
-    const [products, setProduct] = useState([...data]);
+    const [products, setProducts] = useState([...data]);
     const { cartItems, addCartItem, removeCartItem, clearCart } = useCart([], products);
 
     useEffect(() => {
         const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
-        setProduct(results);
+        setProducts(results);
     }, [keyword]);
 
     return (

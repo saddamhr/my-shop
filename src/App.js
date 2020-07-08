@@ -14,9 +14,7 @@ function App() {
 
   const toggleDark = () => {
     setDark(isDark => !isDark)
-  }
-
-  
+  };
 
   return (
     <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
@@ -26,7 +24,7 @@ function App() {
           <Switch>
             <Route path='/checkout' component={Checkout} />
             <Route path='/product/:productId' component={ProductDetails} />
-            <Route path='/' component={() => <Home keyword={keyword}/>} />
+            <Route path='/' component={() => <Home keyword={keyword} />} />
           </Switch>
         </Router>
       </div>
