@@ -1,41 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
-import ProductList from './components/ProductList/ProductList';
-import Cart from './components/Cart/Cart';
-import useCart from './hooks/useCart';
+import ProductDetails from './components/ProductList/ProductDetails';
 import ThemeContext from './ThemeContext';
-
-import data from './data'
+import Checkout from './components/Checkout/Checkout';
+import Home from './components/Home/Home'
 
 import './App.css';
 
 function App() {
-  const [products, setProduct] = useState([...data]);
   const [keyword, setKeyword] = useState("");
   const [dark, setDark] = useState(false);
-  const { cartItems, addCartItem, removeCartItem, clearCart } = useCart([], products);
 
   const toggleDark = () => {
     setDark(isDark => !isDark)
   }
 
-  useEffect(() => {
-    const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
-    setProduct(results);
-  }, [keyword]);
-
-
+  
 
   return (
-    <ThemeContext.Provider value={{dark: dark, toggle: toggleDark }}>
+    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
       <div className={`App ${dark ? 'dark' : 'light'}`}>
-        <NavBar setKeyword={setKeyword} />
-        <ProductList products={products} addCartItem={addCartItem} />
-        <Cart
-          cartItems={cartItems}
-          removeCartItem={removeCartItem}
-          clearCart={clearCart}
-        />
+        <Router>
+          <NavBar setKeyword={setKeyword} />
+          <Switch>
+            <Route path='/checkout' component={Checkout} />
+            <Route path='/product/:productId' component={ProductDetails} />
+            <Route path='/' component={() => <Home keyword={keyword}/>} />
+          </Switch>
+        </Router>
       </div>
     </ThemeContext.Provider>
   );

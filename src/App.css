@@ -31,6 +31,26 @@
   font-size: 15px;
 }
 
+.nav-bar button {
+  height: 35px;
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 10px;
+  cursor: pointer;
+ }
+
+ .nav-bar .links {
+   position: absolute;
+   right: 20px;
+ }
+
+ .nav-bar .links a{
+  text-decoration: none;
+  color: white;
+  border: 1px solid grey;
+  padding: 2px 5px;
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
