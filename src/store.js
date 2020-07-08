@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 
 const init = {
-    cartItems: []
+    products: [],
+    cartItems: [],
+    keyword: ""
 };
 
 const store = createContext(init);
@@ -13,6 +15,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 cartItems: action.payload
+            };
+        case "SET_PRODUCTS":
+            return {
+                ...state,
+                products: action.payload
+            };
+        case "SET_KEYWORD":
+            return {
+                ...state,
+                keyword: action.payload
             };
         default:
             return state;

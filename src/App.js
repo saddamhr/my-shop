@@ -10,7 +10,6 @@ import { StateProvider } from './store'
 import './App.css';
 
 function App() {
-  const [keyword, setKeyword] = useState("");
   const [dark, setDark] = useState(false);
 
   const toggleDark = () => {
@@ -22,11 +21,11 @@ function App() {
       <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
         <div className={`App ${dark ? 'dark' : 'light'}`}>
           <Router>
-            <NavBar setKeyword={setKeyword} />
+            <NavBar />
             <Switch>
               <Route path='/checkout' component={Checkout} />
               <Route path='/product/:productId' component={ProductDetails} />
-              <Route path='/' component={() => <Home keyword={keyword} />} />
+              <Route path='/' component={Home} />
             </Switch>
           </Router>
         </div>

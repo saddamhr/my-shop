@@ -1,18 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useContext } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
 import Cart from '../../components/Cart/Cart';
 import useCart from '../../hooks/useCart';
 import data from '../../data'
+import { store } from '../../store';
 
 
-const Home = ({ keyword }) => {
-    const [products, setProducts] = useState([...data]);
-    const { cartItems, addCartItem, removeCartItem, clearCart } = useCart(products);
+const Home = () => {
+    const { state: { keyword, products }, dispatch } = useContext(store);
+    const { cartItems, addCartItem, removeCartItem, clearCart } = useCart();
 
     useEffect(() => {
         const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
-        setProducts(results);
-    }, [keyword]);
+        dispatch({ type: "SET_PRODUCTS", payload: results });
+    }, [dispatch, keyword]);
 
     return (
         <>
