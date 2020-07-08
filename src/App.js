@@ -5,6 +5,7 @@ import ProductDetails from './components/ProductList/ProductDetails';
 import ThemeContext from './ThemeContext';
 import Checkout from './components/Checkout/Checkout';
 import Home from './components/Home/Home'
+import { StateProvider } from './store'
 
 import './App.css';
 
@@ -17,18 +18,20 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
-      <div className={`App ${dark ? 'dark' : 'light'}`}>
-        <Router>
-          <NavBar setKeyword={setKeyword} />
-          <Switch>
-            <Route path='/checkout' component={Checkout} />
-            <Route path='/product/:productId' component={ProductDetails} />
-            <Route path='/' component={() => <Home keyword={keyword} />} />
-          </Switch>
-        </Router>
-      </div>
-    </ThemeContext.Provider>
+    <StateProvider>
+      <ThemeContext.Provider value={{ dark: dark, toggle: toggleDark }}>
+        <div className={`App ${dark ? 'dark' : 'light'}`}>
+          <Router>
+            <NavBar setKeyword={setKeyword} />
+            <Switch>
+              <Route path='/checkout' component={Checkout} />
+              <Route path='/product/:productId' component={ProductDetails} />
+              <Route path='/' component={() => <Home keyword={keyword} />} />
+            </Switch>
+          </Router>
+        </div>
+      </ThemeContext.Provider>
+    </StateProvider>
   );
 };
 

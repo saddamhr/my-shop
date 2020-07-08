@@ -7,7 +7,7 @@ import data from '../../data'
 
 const Home = ({ keyword }) => {
     const [products, setProducts] = useState([...data]);
-    const { cartItems, addCartItem, removeCartItem, clearCart } = useCart([], products);
+    const { cartItems, addCartItem, removeCartItem, clearCart } = useCart(products);
 
     useEffect(() => {
         const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
