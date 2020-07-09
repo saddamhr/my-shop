@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { setCartItems as setCart } from '../store/actions';
 
 const useCart = () => {
 
@@ -6,7 +7,7 @@ const useCart = () => {
   const dispatch = useDispatch();
 
   const setCartItems = (items) => {
-    dispatch({ type: "SET_CART_ITEMS", payload: items });
+    dispatch(setCart(items));
   };
   const addCartItem = (id) => {
     const item = products.find(product => product.id === id);

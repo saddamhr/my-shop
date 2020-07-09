@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 import ThemeContext from './ThemeContext';
-import { StateProvider } from './store'
+import { StateProvider } from './store/store'
 
 import './App.css';
 

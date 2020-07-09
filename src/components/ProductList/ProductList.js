@@ -4,7 +4,8 @@ import './ProductList.css';
 import ThemeContext from '../../ThemeContext';
 import ListProduct from './ListProduct'
 import useCart from '../../hooks/useCart'
-import data from '../../data'
+import data from '../../data';
+import { setProducts } from '../store/actions';
 
 const ProductList = () => {
     const { addCartItem } = useCart();
@@ -14,7 +15,7 @@ const ProductList = () => {
 
     useEffect(() => {
         const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
-        dispatch({ type: "SET_PRODUCTS", payload: results });
+        dispatch(setProducts(results));
     }, [dispatch, keyword]);
 
     return (
