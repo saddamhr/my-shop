@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ListProduct from './ListProduct'
-import data from '../../data'
 import useCart from '../../hooks/useCart'
 
 const ProductDetails = () => {
+    const [product, setProduct] = useState({});
     const { productId } = useParams();
-    const { addCartItem } = useCart(data);
+    const { addCartItem } = useCart();
 
-    const product = data.find(p => p.id === parseInt(productId));
+    const fetchProduct = id => fetch('http://localhost:4000/products/' + id).then(res => res.json())
+
+    useEffect(() => {
+        (async () => {
+            const result = await fetchProduct(productId)
+            setProduct(result)
+        })();
+    }, [productId])
+
     return (
         <div className="checkout">
             <ListProduct {...product} addCartItem={addCartItem} />

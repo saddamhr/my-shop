@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import useCart from '../../hooks/useCart'
-import data from '../../data'
 
 const Checkout = () => {
     const [address, setAddress] = useState("");
-    const { total, clearCart } = useCart(data);
+    const { total, clearCart } = useCart();
 
     const handleChange = (e) => {
         setAddress(e.target.value);
