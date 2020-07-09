@@ -1,15 +1,16 @@
 import React, { useContext, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './ProductList.css';
 import ThemeContext from '../../ThemeContext';
 import ListProduct from './ListProduct'
 import useCart from '../../hooks/useCart'
-import { store } from '../../store'
 import data from '../../data'
 
 const ProductList = () => {
     const { addCartItem } = useCart();
     const { dark } = useContext(ThemeContext);
-    const { state: { keyword, products }, dispatch } = useContext(store);
+    const { keyword, products } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));

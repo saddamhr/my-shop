@@ -1,4 +1,6 @@
-import React, { createContext, useReducer } from 'react';
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 const init = {
     products: [],
@@ -6,10 +8,7 @@ const init = {
     keyword: ""
 };
 
-const store = createContext(init);
-const { Provider } = store;
-
-const reducer = (state, action) => {
+const reducer = (state = init, action) => {
     switch (action.type) {
         case "SET_CART_ITEMS":
             return {
@@ -31,9 +30,13 @@ const reducer = (state, action) => {
     }
 };
 
+const store = createStore(
+    reducer, /* preloadedState, */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 const StateProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, init);
-    return <Provider value={{ state, dispatch }}>{children}</Provider>
+    return <Provider store={store}>{children}</Provider>
 }
 
 export {
