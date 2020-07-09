@@ -5,7 +5,7 @@ import ThemeContext from '../../ThemeContext';
 import ListProduct from './ListProduct'
 import useCart from '../../hooks/useCart'
 import data from '../../data';
-import { setProducts } from '../store/actions';
+import { setProducts } from '../../store/actions';
 
 const ProductList = () => {
     const { addCartItem } = useCart();
