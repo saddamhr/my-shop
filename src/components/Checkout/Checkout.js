@@ -15,7 +15,7 @@ const Checkout = () => {
             <h3>Checkout total: {total}</h3>
             <div>
                 {total > 0 ? (<div className="cart-item">
-                    <div className="info">
+                <div className="info">
                         <span><input placeholder="Address" onChange={handleChange} /></span>
                         <button style={{ color: 'white', backgroundColor: !address ? 'gray' : 'green' }}
                             disable={`${!address}`}

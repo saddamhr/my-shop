@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
-import ProductDetails from './components/ProductList/ProductDetails';
 import ThemeContext from './ThemeContext';
-import Checkout from './components/Checkout/Checkout';
-import Home from './components/Home/Home'
-import Cart from './components/Cart/Cart'
 import { StateProvider } from './store'
 
 import './App.css';
+
+const Home = lazy(() => import('./components/Home/Home'));
+const Checkout = lazy(() => import('./components/Checkout/Checkout'));
+const ProductDetails = lazy(() => import('./components/ProductList/ProductDetails'));
+const Cart = lazy(() => import('./components/Cart/Cart'));
 
 function App() {
   const [dark, setDark] = useState(false);
@@ -23,12 +24,14 @@ function App() {
         <div className={`App ${dark ? 'dark' : 'light'}`}>
           <Router>
             <NavBar />
-            <Switch>
-              <Route path='/checkout' component={Checkout} />
-              <Route path='/product/:productId' component={ProductDetails} />
-              <Route path='/' component={Home} />
-            </Switch>
-            <Cart />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Route path='/checkout' component={Checkout} />
+                <Route path='/product/:productId' component={ProductDetails} />
+                <Route path='/' component={Home} />
+              </Switch>
+              <Cart />
+            </Suspense>
           </Router>
         </div>
       </ThemeContext.Provider>
