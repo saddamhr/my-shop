@@ -5,6 +5,7 @@ import ProductDetails from './components/ProductList/ProductDetails';
 import ThemeContext from './ThemeContext';
 import Checkout from './components/Checkout/Checkout';
 import Home from './components/Home/Home'
+import Cart from './components/Cart/Cart'
 import { StateProvider } from './store'
 
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
               <Route path='/product/:productId' component={ProductDetails} />
               <Route path='/' component={Home} />
             </Switch>
+            <Cart />
           </Router>
         </div>
       </ThemeContext.Provider>

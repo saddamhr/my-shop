@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './ProductList.css';
 import ThemeContext from '../../ThemeContext';
 import ListProduct from './ListProduct'
+import useCart from '../../hooks/useCart'
+import { store } from '../../store'
+import data from '../../data'
 
-
-const ProductList = ({ products, addCartItem }) => {
+const ProductList = () => {
+    const { addCartItem } = useCart();
     const { dark } = useContext(ThemeContext);
+    const { state: { keyword, products }, dispatch } = useContext(store);
+
+    useEffect(() => {
+        const results = data.filter(product => product.title.includes(keyword) || product.brand.includes(keyword));
+        dispatch({ type: "SET_PRODUCTS", payload: results });
+    }, [dispatch, keyword]);
 
     return (
         <div className={`product-list ${dark ? 'dark' : 'light'}`}>

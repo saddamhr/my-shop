@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import './Cart.css'
 import ThemeContext from '../../ThemeContext';
+import useCart from '../../hooks/useCart'
 
 const CartItem = ({ id, title, price, quantity, removeCartItem }) => {
     return (
@@ -14,7 +15,8 @@ const CartItem = ({ id, title, price, quantity, removeCartItem }) => {
     );
 };
 
-const Cart = ({ cartItems, removeCartItem, clearCart }) => {
+const Cart = () => {
+    const { cartItems, total, removeCartItem, clearCart } = useCart();
     const [checkoutOpen, setCheckoutOpen] = useState(false);
     const [address, setAddress] = useState("");
     const { dark } = useContext(ThemeContext);
@@ -27,7 +29,6 @@ const Cart = ({ cartItems, removeCartItem, clearCart }) => {
         setAddress(e.target.value);
     }
 
-    const total = cartItems.reduce((sum, curr) => (sum + curr.price * curr.quantity), 0);
     return (
         <div className={`cart ${dark ? 'dark' : 'light'}`}>
             <h4>Cart Items</h4>
@@ -49,7 +50,7 @@ const Cart = ({ cartItems, removeCartItem, clearCart }) => {
                         <div className="cart-item">
                             <div className="info">
                                 <button style={{ color: 'white', backgroundColor: 'red' }} onClick={clearCart}>Cancel</button>
-                <button style={{ color: 'white', backgroundColor: 'green' }} onClick={toggleCheckout}>{checkoutOpen ? "Hide" : "Checkout"}</button>
+                                <button style={{ color: 'white', backgroundColor: 'green' }} onClick={toggleCheckout}>{checkoutOpen ? "Hide" : "Checkout"}</button>
                             </div>
                         </div>
                     </>
